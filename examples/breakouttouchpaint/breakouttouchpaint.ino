@@ -53,7 +53,7 @@ int oldcolor, currentcolor;
 void setup(void) {
  // while (!Serial);     // used for leonardo debugging
  
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println(F("Touch Paint!"));
   
   tft.begin();

@@ -20,7 +20,11 @@
 
 // For the Adafruit shield, these are the default.
 #define TFT_DC 9
+#if defined(ARDUINO_ARCH_SPRESENSE)
+#define TFT_CS 7
+#else
 #define TFT_CS 10
+#endif
 
 // Use hardware SPI (on Uno, #13, #12, #11) and the above for CS/DC
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
@@ -28,7 +32,7 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 //Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("ILI9341 Test!"); 
  
   tft.begin();

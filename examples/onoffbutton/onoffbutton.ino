@@ -69,7 +69,7 @@ void greenBtn()
 
 void setup(void)
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   tft.begin();
   if (!ts.begin()) { 
     Serial.println("Unable to start touchscreen.");

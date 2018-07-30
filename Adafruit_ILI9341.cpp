@@ -117,6 +117,8 @@
 
 #if defined (__AVR__) ||  defined(TEENSYDUINO) ||  defined(ARDUINO_ARCH_STM32F1)
     #define HSPI_SET_CLOCK() SPI_OBJECT.setClockDivider(SPI_CLOCK_DIV2);
+#elif defined (ARDUINO_ARCH_SPRESENSE)
+    #define HSPI_SET_CLOCK() SPI_OBJECT.setClockDivider(SPI_CLOCK_DIV2);
 #elif defined (__arm__)
     #define HSPI_SET_CLOCK() SPI_OBJECT.setClockDivider(11);
 #elif defined(ESP8266) || defined(ESP32)

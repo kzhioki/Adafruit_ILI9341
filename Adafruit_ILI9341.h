@@ -134,6 +134,8 @@ typedef volatile uint32_t RwReg;
 
 #if defined (ARDUINO_STM32_FEATHER) || defined (ARDUINO_MAXIM)    // doesnt work on wiced feather
   #undef USE_FAST_PINIO
+#elif defined (ARDUINO_ARCH_SPRESENSE)
+  #undef USE_FAST_PINIO
 #elif defined (__AVR__) || defined(TEENSYDUINO) || defined(ESP8266) || defined (ESP32) || defined(__arm__)
   #define USE_FAST_PINIO
 #endif
@@ -198,6 +200,8 @@ class Adafruit_ILI9341 : public Adafruit_GFX {
         volatile uint8_t *mosiport, *misoport, *clkport, *dcport, *csport;
         uint8_t  mosipinmask, misopinmask, clkpinmask, cspinmask, dcpinmask;
 #endif
+#elif defined (ARDUINO_ARCH_SPRESENSE)
+        int8_t      _cs, _dc, _rst, _sclk, _mosi, _miso;
 #elif defined (__arm__)
         int32_t  _cs, _dc, _rst, _sclk, _mosi, _miso;
 #ifdef USE_FAST_PINIO
