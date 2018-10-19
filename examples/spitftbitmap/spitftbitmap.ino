@@ -17,7 +17,19 @@
 #include <Adafruit_GFX.h>    // Core graphics library
 #include "Adafruit_ILI9341.h" // Hardware-specific library
 #include <SPI.h>
+#if defined(ARDUINO_ARCH_SPRESENSE)
+#include <SDHCI.h>
+#else
 #include <SD.h>
+#endif
+
+#if defined(ARDUINO_ARCH_SPRESENSE)
+#define TFT_RST 8
+#define TFT_DC  9
+#define TFT_CS -1
+Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+SDClass SD;
+#else
 
 // TFT display and SD card will share the hardware SPI interface.
 // Hardware SPI pins are specific to the Arduino board type and
@@ -29,18 +41,21 @@
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
 #define SD_CS 4
+#endif
 
 void setup(void) {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   tft.begin();
   
   yield();
 
   Serial.print("Initializing SD card...");
-  if (!SD.begin(SD_CS)) {
+#if !defined(ARDUINO_ARCH_SPRESENSE)
+   if (!SD.begin(SD_CS)) {
     Serial.println("failed!");
   }
+#endif
   Serial.println("OK!");
 
 }

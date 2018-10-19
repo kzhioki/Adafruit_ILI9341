@@ -18,6 +18,12 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 
+#if defined(ARDUINO_ARCH_SPRESENSE)
+#define TFT_RST 8
+#define TFT_DC  9
+#define TFT_CS -1
+Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+#else
 // For the Adafruit shield, these are the default.
 #define TFT_DC 9
 #define TFT_CS 10
@@ -26,9 +32,10 @@
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 // If using the breakout, change pins as desired
 //Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
+#endif
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("ILI9341 Test!"); 
  
   tft.begin();
