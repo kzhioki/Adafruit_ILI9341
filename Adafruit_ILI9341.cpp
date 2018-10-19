@@ -61,6 +61,8 @@
   #define SPI_DEFAULT_FREQ  8000000
 #elif defined(ESP8266) || defined(ESP32)
   #define SPI_DEFAULT_FREQ  40000000
+#elif defined(ARDUINO_ARCH_SPRESENSE)
+  #define SPI_DEFAULT_FREQ  40000000
 #elif defined(RASPI)
   #define SPI_DEFAULT_FREQ  80000000
 #elif defined(ARDUINO_ARCH_STM32F1)
